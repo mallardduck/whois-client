@@ -1,7 +1,7 @@
 <?php
 namespace MallardDuck\Whois\Test;
 
-use MallardDuck\Whois\Client;
+use MallardDuck\Whois\SimpleClient;
 
 /**
 *  Corresponding Class to test the whois Client class
@@ -11,7 +11,7 @@ use MallardDuck\Whois\Client;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisClientRawTest extends BaseTest
+class SimpleClientTest extends BaseTest
 {
 
     /**
@@ -19,9 +19,9 @@ class WhoisClientRawTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Client;
-        $this->assertTrue(is_object($var));
-        unset($var);
+        $client = new SimpleClient;
+        $this->assertTrue(is_object($client));
+        unset($client);
     }
 
     /**
@@ -29,13 +29,13 @@ class WhoisClientRawTest extends BaseTest
      */
     public function testBasicRequestConcepts()
     {
-        $var = new Client;
-        $this->assertTrue(is_object($var));
-        $var->createConnection("whois.nic.me");
-        $status = $var->makeRequest("danpock.me");
-        $response = $var->getResponseAndClose();
+        $client = new SimpleClient;
+        $this->assertTrue(is_object($client));
+        $client->createConnection("whois.nic.me");
+        $status = $client->writeRequest("danpock.me");
+        $response = $client->getResponseAndClose();
         $this->assertTrue(strstr($response, "\r\n", true) === "Domain Name: DANPOCK.ME");
 
-        unset($response, $status, $var);
+        unset($response, $status, $client);
     }
 }
