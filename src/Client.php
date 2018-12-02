@@ -60,11 +60,17 @@ class Client extends AbstractWhoisClient
             $primaryMissing = $input ? false : true;
             $serverMissing = $whoisServer ? false : true;
             if ($primaryMissing && $serverMissing) {
-                throw new MissingArgException("No input provided. Must provide both primary input (domain or IP) and whois server to this method.");
+                throw new MissingArgException(
+                    "No input provided. Must provide both primary input (domain or IP) and whois server to this method."
+                );
             } elseif ($primaryMissing) {
-                throw new MissingArgException("No primary input provided. Cannot lookup empty domain, or IP string.");
+                throw new MissingArgException(
+                    "No primary input provided. Cannot lookup empty domain, or IP string."
+                );
             } elseif ($serverMissing) {
-                throw new MissingArgException("No whois server identifier has been provided. Must provide IP or domain for whois server with this method.");
+                throw new MissingArgException(
+                    "No whois server provided. Must provide IP or domain for whois server with this method."
+                );
             }
         }
     }
