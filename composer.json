@@ -3,6 +3,7 @@
     "type": "library",
     "description": "A very basic Whois client for PHP. The library is limited in function since it's intended to be a low-level client that handles only request and raw output.",
     "keywords": [
+        "RFC3912",
         "domain",
         "idn",
         "lookup",
