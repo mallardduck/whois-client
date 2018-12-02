@@ -2,8 +2,6 @@
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
-use MallardDuck\Whois\Exceptions\MissingArgException;
-use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -63,56 +61,7 @@ class WhoisDomainTest extends BaseTest
             ['sub.www.domain.co.uk'],
             ['президент.рф'],
             ['www.ПРЕЗИДЕНТ.рф'],
-        ];
-    }
-
-    /**
-     * A very basic test to check what invalid domains return unknown whois exception.
-     * @param string $domain Test domains!
-     * @dataProvider invalidDomainsProvider
-     */
-    public function testInvalidDomain($domain)
-    {
-        $this->expectException(UnknownWhoisException::class);
-        $response = $this->client->lookup($domain, 'whois.verisign-grs.com');
-    }
-
-    /**
-    * The data provider for invalid domains test.
-     */
-    public function invalidDomainsProvider()
-    {
-        return [
-            //['domain.1com'],
-            //['domain.co.u'],
-            //['xn--e1afmkfd.xn--80akhb.yknj4f'],
-        ];
-    }
-
-    /**
-     * Test function comment stub.
-     * @param string $domain    Test domains!
-     * @param string $exception Exception class name!
-     * @dataProvider invalidDomainAndExceptionProvider
-     */
-    public function testInvalidParsingDomains($domain, $exception)
-    {
-        $this->expectException($exception);
-        $this->client->lookup($domain, 'whois.verisign-grs.com');
-    }
-
-    /**
-     * Test function comment stub.
-     */
-    public function invalidDomainAndExceptionProvider()
-    {
-        return [
-            ['', MissingArgException::class],
-            //['domain', MissingArgException::class],
-            //['президент.рф2', UnknownWhoisException::class],
-            //['президент.рф', $this->getUriException()],
-            //['президент.рф.'],
-            //['xn--e1afmkfd.xn--80akhbyknj4f.'],
+            ['domain.1com'],
         ];
     }
 }

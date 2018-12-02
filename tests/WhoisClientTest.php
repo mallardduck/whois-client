@@ -26,8 +26,8 @@ class WhoisClientTest extends BaseTest
     }
 
     /**
-    * Make sure we throw an exception if no domain is given.
-    */
+     * Make sure we throw an exception if no args are given.
+     */
     public function testEmptyLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
@@ -38,8 +38,32 @@ class WhoisClientTest extends BaseTest
     }
 
     /**
-    * Do a basic lookup for google.com.
-    */
+     * Make sure we throw an exception if no domain given.
+     */
+    public function testEmptyPrimaryLookupThrowsException()
+    {
+        $this->expectException(MissingArgException::class);
+        $var = new Client;
+        $this->assertTrue(is_object($var));
+        $var->lookup('', 'something'); // doesn't need to be real value - testing arg validation
+        unset($var);
+    }
+
+    /**
+     * Make sure we throw an exception if no whois server given.
+     */
+    public function testEmptyServerLookupThrowsException()
+    {
+        $this->expectException(MissingArgException::class);
+        $var = new Client;
+        $this->assertTrue(is_object($var));
+        $var->lookup('something', ''); // doesn't need to be real value - testing arg validation
+        unset($var);
+    }
+
+    /**
+     * Do a basic lookup for google.com.
+     */
     public function testClientLookupGoogle()
     {
         $var = new Client;
@@ -48,6 +72,34 @@ class WhoisClientTest extends BaseTest
         $this->assertTrue(is_string($results));
         $this->assertTrue(1 <= count(explode("\r\n", $results)));
         unset($var, $results);
+    }
+
+    /**
+     * Test function comment stub.
+     * @param string $input         Test input!
+     * @param string $whoisServer   Test whois!
+     * @dataProvider validateLookupArgsProvider
+     */
+    public function testValidateLookupArgs($input, $whoisServer)
+    {
+        $client = new Client;
+        $this->assertTrue(method_exists($client, 'validateLookupArgs'));
+        $foo = self::getMethod($client, 'validateLookupArgs');
+        $this->expectException(MissingArgException::class);
+        $foo->invokeArgs($client, [$input, $whoisServer]);
+        unset($client, $foo, $wat);
+    }
+
+    /**
+     * Test function comment stub.
+     */
+    public function validateLookupArgsProvider()
+    {
+        return [
+                ['', 'whois.verisign-grs.com'],
+                ['google.com', ''],
+                ['', ''],
+            ];
     }
 
     /**
@@ -79,33 +131,6 @@ class WhoisClientTest extends BaseTest
                 ['🍕💩.ws', 'xn--vi8hiv.ws'],
                 ['президент.рф', 'xn--d1abbgf6aiiy.xn--p1ai'],
                 ['xn--e1afmkfd.xn--80akhbyknj4f', 'xn--e1afmkfd.xn--80akhbyknj4f'],
-            ];
-    }
-
-    /**
-     * Test function comment stub.
-     * @param string $domain    Test domains!
-     * @param string $exception Exception class name!
-     * @dataProvider invalidDomainsProvider
-     */
-    public function testInvalidParsingDomains($domain, $exception)
-    {
-        $client = new Client;
-        $this->assertTrue(method_exists($client, 'parseWhoisInput'));
-        $foo = self::getMethod($client, 'parseWhoisInput');
-        $this->expectException($exception);
-        $foo->invokeArgs($client, [$domain]);
-        unset($client, $foo);
-    }
-
-    /**
-     * Test function comment stub.
-     */
-    public function invalidDomainsProvider()
-    {
-        return [
-                //['', MissingArgException::class],
-                //['президент.рф', $this->getUriException()],
             ];
     }
 }
