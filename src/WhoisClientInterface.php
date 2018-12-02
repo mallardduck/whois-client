@@ -24,7 +24,7 @@ interface WhoisClientInterface
      *
      * @return string               The raw text results of the query response.
      */
-    public function makeWhoisRequest(string $lookupValue, string $whoisServer);
+    public function makeRequest(string $lookupValue, string $whoisServer);
 
     /**
      * Creates the connection to the whois server.
@@ -38,17 +38,20 @@ interface WhoisClientInterface
     public function createConnection(string $whoisServer);
 
     /**
-     * Makes a whois request
+     * Writes a whois request to the active socket connection.
      *
-     * @param string $lookupValue The cache item to save.
+     * @param string $lookupValue The value to lookup for the whois request.
      *
-     * @return bool True if all not-yet-saved items were successfully saved or
-     * there were none. False otherwise.
+     * @return int|bool Either an int of the return code, or false on some errors.
      */
-    public function makeRequest(string $lookupValue);
+    public function writeRequest(string $lookupValue);
 
     /**
-     * A function for making a raw Whois request.
+     * A method for retrieving a raw Whois response.
+     *
+     * This method must retrieve the reponse from the active socket and then
+     * close the socket. If the connection is not properly closed servers could
+     * drop/ignore rapid subsequent requests.
      *
      * @return string   The raw results of the query response.
      */

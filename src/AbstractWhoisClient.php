@@ -45,10 +45,10 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @return string               The raw text results of the query response.
      */
-    public function makeWhoisRequest(string $lookupValue, string $whoisServer)
+    public function makeRequest(string $lookupValue, string $whoisServer) : string
     {
         $this->createConnection($whoisServer);
-        $this->makeRequest($lookupValue);
+        $this->writeRequest($lookupValue);
         return $this->getResponseAndClose();
     }
 
@@ -65,25 +65,28 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     }
 
     /**
-     * Makes a whois request
+     * Writes a whois request to the active socket connection.
      *
      * @param string $lookupValue The cache item to save.
      *
-     * @return bool True if all not-yet-saved items were successfully saved or
-     * there were none. False otherwise.
+     * @return int|bool Either an int of the return code, or false on some errors.
      */
-    final public function makeRequest(string $lookupValue) : bool
+    final public function writeRequest(string $lookupValue)
     {
         // Send the domain name requested for whois lookup.
         return $this->connection->writeString($lookupValue.$this->clrf);
     }
 
     /**
-     * A function for making a raw Whois request.
+     * A method for retrieving a raw Whois response.
+     *
+     * This method must retrieve the reponse from the active socket and then
+     * close the socket. If the connection is not properly closed servers could
+     * drop/ignore rapid subsequent requests.
      *
      * @return string   The raw results of the query response.
      */
-    final public function getResponseAndClose()
+    final public function getResponseAndClose() : string
     {
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();
