@@ -4,7 +4,7 @@
             "src"
         ]
     },
-    "timeout": 45,
+    "timeout": 60,
     "logs": {
         "text": "build/infection/infection-log.txt",
         "summary": "build/infection/summary-log.txt",
@@ -17,17 +17,6 @@
             "ignore": [
                 "MallardDuck\\Whois\\Client",
                 "MallardDuck\\Whois\\WhoisServerList\\DomainLocator"
-            ]
-        },
-        "MethodCallRemoval": {
-            "ignore": [
-                "MallardDuck\\Whois\\Exceptions\\MissingArgException",
-                "MallardDuck\\Whois\\Exceptions\\UnknownWhoisException"
-            ]
-        },
-        "Throw_": {
-            "ignore": [
-                "MallardDuck\\Whois\\Client"
             ]
         }
     }
