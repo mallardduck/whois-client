@@ -56,22 +56,20 @@ class Client extends AbstractWhoisClient
      */
     private function validateLookupArgs(string $input = "", string $whoisServer = "") : void
     {
-        if (empty($input) || empty($whoisServer)) {
-            $primaryMissing = $input ? false : true;
-            $serverMissing = $whoisServer ? false : true;
-            if ($primaryMissing && $serverMissing) {
-                throw new MissingArgException(
-                    "No input provided. Must provide both primary input (domain or IP) and whois server to this method."
-                );
-            } elseif ($primaryMissing) {
-                throw new MissingArgException(
-                    "No primary input provided. Cannot lookup empty domain, or IP string."
-                );
-            } elseif ($serverMissing) {
-                throw new MissingArgException(
-                    "No whois server provided. Must provide IP or domain for whois server with this method."
-                );
-            }
+        $primaryMissing = $input ? false : true;
+        $serverMissing = $whoisServer ? false : true;
+        if ($primaryMissing && $serverMissing) {
+            throw new MissingArgException(
+                "No input provided. Must provide both primary input (domain or IP) and whois server to this method."
+            );
+        } elseif ($primaryMissing) {
+            throw new MissingArgException(
+                "No primary input provided. Cannot lookup empty domain, or IP string."
+            );
+        } elseif ($serverMissing) {
+            throw new MissingArgException(
+                "No whois server provided. Must provide IP or domain for whois server with this method."
+            );
         }
     }
 
