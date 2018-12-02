@@ -76,34 +76,6 @@ class WhoisClientTest extends BaseTest
 
     /**
      * Test function comment stub.
-     * @param string $input         Test input!
-     * @param string $whoisServer   Test whois!
-     * @dataProvider validateLookupArgsProvider
-     */
-    public function testValidateLookupArgs($input, $whoisServer)
-    {
-        $client = new Client;
-        $this->assertTrue(method_exists($client, 'validateLookupArgs'));
-        $foo = self::getMethod($client, 'validateLookupArgs');
-        $this->expectException(MissingArgException::class);
-        $foo->invokeArgs($client, [$input, $whoisServer]);
-        unset($client, $foo, $wat);
-    }
-
-    /**
-     * Test function comment stub.
-     */
-    public function validateLookupArgsProvider()
-    {
-        return [
-                ['', 'whois.verisign-grs.com'],
-                ['google.com', ''],
-                ['', ''],
-            ];
-    }
-
-    /**
-     * Test function comment stub.
      * @param string $domain Test domains!
      * @param string $parsed Parsed domains!
      * @dataProvider validDomainsProvider
