@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Improved usage of return types where possible.
+
+### Changed
+- Update README.md for large refactor.
+- Redefine interface method names & updated PHPdocblocks.
+- Renamed class properties from domain specific to more general input names.
+
+### Removed
+- Deleted the blobs folder from the library.
+- Removed locator related tests & refactor tests to reflect changes.
+- Removed all WhoisServerLocator and AbstractLocator code.
+- Removed League URI dependency since this package should not parse whois input.
 
 ## [1.0.0] - 2018-12-01
 ### Added
