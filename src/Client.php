@@ -25,7 +25,7 @@ class Client extends AbstractWhoisClient
      * The parsed input after validating and encoding.
      * @var string
      */
-    public $parsedInput;
+    public $parsedInput = '';
 
     /**
      * Construct the Whois Client Class.
