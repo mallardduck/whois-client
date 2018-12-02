@@ -7,9 +7,9 @@
 [![License](https://poser.pugx.org/mallardduck/whois-client/license)](https://packagist.org/packages/mallardduck/whois-client)
 [![Coverage Status](https://coveralls.io/repos/github/mallardduck/whois-client/badge.svg?branch=master)](https://coveralls.io/github/mallardduck/whois-client?branch=master)
 
-If you are working with Whois in PHP this library provides a very basic client.
+This package contains the most basic Whois (RFC3912) library for PHP possible. It provides a Whois client that requires lookup and server input to provide a raw Whois reponse.
 
-Rather than focus on the user friendly output this library focuses on the raw Whois protocol. The library is limited in function since it's intended to be a low-level client that handles only request and raw output. Basically the package supports the look up of a TLDs primary Whois server and then will do a query of the domain provided.
+Rather than focus on the user friendly output this library focuses on the raw Whois protocol. The library is limited in function since it's intended to be a low-level client that handles only request and raw output. Basically the package creates a client that has a telnet-esque experience. I.e. it accepts a server to connect to, creates a socket connection, sends a basic request to lookup and then provides the response.
 
 Note: The last version to support PHP version 7.0 was tagged as 0.4.0.
 
@@ -17,9 +17,9 @@ Note: The last version to support PHP version 7.0 was tagged as 0.4.0.
 * PHP >= 7.1
 
 ## Features
-* Pure PHP based Whois client.
-* Simple API for getting raw Whois results in PHP.
+* Pure PHP based Whois (RFC3912) client.
 * Unicode IDN and punycode support.
+* Simple API for getting raw Whois results in PHP.
 
 ## Installation
 The best installation method is to simply use composer.
