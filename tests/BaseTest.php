@@ -16,15 +16,6 @@ abstract class BaseTest extends TestCase
 
     /**
      * [getMethod description]
-     * @return \League\Uri\Components\Exception         [description]
-     */
-    public function getUriException()
-    {
-        return \League\Uri\Components\Exception::class;
-    }
-
-    /**
-     * [getMethod description]
      * @param  mixed  $class [description]
      * @param  string $name  [description]
      * @return mixed         [description]
