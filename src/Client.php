@@ -56,8 +56,8 @@ class Client extends AbstractWhoisClient
      */
     private function validateLookupArgs(string $input = "", string $whoisServer = "") : void
     {
-        $primaryMissing = $input ? false : true;
-        $serverMissing = $whoisServer ? false : true;
+        $primaryMissing = empty($input);
+        $serverMissing = empty($whoisServer);
         if ($primaryMissing && $serverMissing) {
             throw new MissingArgException(
                 "No input provided. Must provide both primary input (domain or IP) and whois server to this method."
