@@ -66,7 +66,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function createConnection(string $whoisServer) : void
     {
         // Form a TCP socket connection to the whois server.
-        $this->connection = new SocketClient('tcp://'.$whoisServer.':'.$this->port, $this->timeout);
+        $this->connection = new SocketClient('tcp://' . $whoisServer . ':' . $this->port, $this->timeout);
         $this->connection->connect();
     }
 
@@ -80,7 +80,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function writeRequest(string $lookupValue)
     {
         // Send the domain name requested for whois lookup.
-        return $this->connection->writeString($lookupValue.$this->clrf);
+        return $this->connection->writeString($lookupValue . $this->clrf);
     }
 
     /**
