@@ -43,22 +43,11 @@ class WhoisClientTest extends BaseTest
     public function testClientLookupGoogle()
     {
         $var = new Client;
-        $results = $var->lookup("google.com");
+        $results = $var->lookup('google.com', 'whois.verisign-grs.com');
         $this->assertTrue(!empty($results));
         $this->assertTrue(is_string($results));
         $this->assertTrue(1 <= count(explode("\r\n", $results)));
         unset($var, $results);
-    }
-
-    /**
-    * Test function comment stub.
-    */
-    public function testMakeSafeWhoisRequest()
-    {
-        $client = new Client;
-        $rawResults = $client->makeSafeWhoisRequest("danpock.me", "whois.nic.me");
-        $this->assertTrue(strstr($rawResults, "\r\n", true) === "Domain Name: DANPOCK.ME");
-        unset($client, $rawResults);
     }
 
     /**
@@ -67,13 +56,13 @@ class WhoisClientTest extends BaseTest
      * @param string $parsed Parsed domains!
      * @dataProvider validDomainsProvider
      */
-    public function testValidParsingDomains($domain, $parsed)
+    public function testValidParsingInputs($domain, $parsed)
     {
         $client = new Client;
-        $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
-        $foo = self::getMethod($client, 'parseWhoisDomain');
+        $this->assertTrue(method_exists($client, 'parseWhoisInput'));
+        $foo = self::getMethod($client, 'parseWhoisInput');
         $wat = $foo->invokeArgs($client, [$domain]);
-        $this->assertTrue($parsed === $wat);
+        $this->assertEquals($parsed, $wat);
         unset($client, $foo, $wat);
     }
 
@@ -83,10 +72,11 @@ class WhoisClientTest extends BaseTest
     public function validDomainsProvider()
     {
         return [
-                ['domain', ''],
-                ['sub.domain.wedding', 'domain.wedding'],
-                ['danpock.me.', 'danpock.me'],
-                ['www.sub.domain.xyz', 'domain.xyz'],
+                ['domain', 'domain'],
+                ['danpock.me.', 'danpock.me.'],
+                ['www.sub.domain.xyz', 'www.sub.domain.xyz'],
+                ['i❤.ws', 'xn--i-7iq.ws'],
+                ['🍕💩.ws', 'xn--vi8hiv.ws'],
                 ['президент.рф', 'xn--d1abbgf6aiiy.xn--p1ai'],
                 ['xn--e1afmkfd.xn--80akhbyknj4f', 'xn--e1afmkfd.xn--80akhbyknj4f'],
             ];
@@ -101,8 +91,8 @@ class WhoisClientTest extends BaseTest
     public function testInvalidParsingDomains($domain, $exception)
     {
         $client = new Client;
-        $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
-        $foo = self::getMethod($client, 'parseWhoisDomain');
+        $this->assertTrue(method_exists($client, 'parseWhoisInput'));
+        $foo = self::getMethod($client, 'parseWhoisInput');
         $this->expectException($exception);
         $foo->invokeArgs($client, [$domain]);
         unset($client, $foo);
@@ -114,8 +104,8 @@ class WhoisClientTest extends BaseTest
     public function invalidDomainsProvider()
     {
         return [
-                ['президент.рф', $this->getUriException()],
-                ['', MissingArgException::class],
+                //['', MissingArgException::class],
+                //['президент.рф', $this->getUriException()],
             ];
     }
 }
