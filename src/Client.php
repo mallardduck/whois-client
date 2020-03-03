@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois;
 
 use TrueBV\Punycode;
@@ -11,7 +12,7 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  *
  * @copyright lucidinternets.com 2018
  *
- * @version 0.4.0
+ * @version 1.0.0
  */
 class Client extends AbstractWhoisClient
 {

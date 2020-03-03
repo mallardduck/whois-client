@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois;
 
 /**
@@ -8,7 +9,7 @@ namespace MallardDuck\Whois;
  *
  * @copyright lucidinternets.com 2018
  *
- * @version 0.6.0
+ * @version 1.0.0
  */
 class SimpleClient extends AbstractWhoisClient
 {

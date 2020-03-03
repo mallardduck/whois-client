@@ -20,6 +20,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Removed all WhoisServerLocator and AbstractLocator code.
 - Removed League URI dependency since this package should not parse whois input.
 
+## [1.1.0] - 2020-03-02
+### Added
+- Added a local `SocketClient` as a thin wrapper for PHP stream sockets.
+- Added exception for new `SocketClient` for when things go wrong.
+
+### Changed
+- Modified how `AbstractWhoisClient::createConnection` works internally by swapping `SocketClient`.
+- Tweaked how `getSearchableHostname()` functions to allow host/glue record look up.
+
+### Removed
+- Dependency on `hoa/socket` library.
+
+## [1.0.1] - 2020-02-24
+### Changed
+- Locked `league/uri` and `league/uri-components` to fix breaking upstream changes.
+
 ## [1.0.0] - 2018-12-01
 ### Added
 - New basic version of client as SimpleClient. Just a concrete version of the AbstractWhoisClient.

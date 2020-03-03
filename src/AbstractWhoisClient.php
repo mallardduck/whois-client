@@ -1,7 +1,7 @@
 <?php
+
 namespace MallardDuck\Whois;
 
-use Hoa\Socket\Client as SocketClient;
 use MallardDuck\Whois\WhoisClientInterface;
 
 /**
@@ -11,7 +11,7 @@ use MallardDuck\Whois\WhoisClientInterface;
  *
  * @copyright lucidinternets.com 2018
  *
- * @version 0.4.0
+ * @version 1.0.0
  */
 abstract class AbstractWhoisClient implements WhoisClientInterface
 {
@@ -63,7 +63,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @param string $whoisServer The whois server domain or IP being queried.
      */
-    final public function createConnection(string $whoisServer) : void
+    final public function createConnection(string $whoisServer): void
     {
         // Form a TCP socket connection to the whois server.
         $this->connection = new SocketClient('tcp://' . $whoisServer . ':' . $this->port, $this->timeout);
@@ -97,7 +97,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();
         // Disconnect the connections after use in order to prevent observed
-        // network & performance issues. Not doing this caused mild trottling.
+        // network & performance issues. Not doing this caused mild throttling.
         $this->connection->disconnect();
         return $response;
     }

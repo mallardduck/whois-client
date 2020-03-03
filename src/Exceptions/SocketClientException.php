@@ -11,7 +11,7 @@ namespace MallardDuck\Whois\Exceptions;
  *
  * @version 1.0.0
  */
-class MissingArgException extends \Exception
+class SocketClientException extends \Exception
 {
 
     /** @var int    An integer code for the exception. */

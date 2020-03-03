@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
@@ -20,8 +21,8 @@ class WhoisClientTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Client;
-        $this->assertTrue(is_object($var));
+        $var = new Client();
+        $this->assertIsObject($var);
         unset($var);
     }
 
@@ -31,8 +32,8 @@ class WhoisClientTest extends BaseTest
     public function testEmptyLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
-        $var = new Client;
-        $this->assertTrue(is_object($var));
+        $var = new Client();
+        $this->assertIsObject($var);
         $var->lookup();
         unset($var);
     }
@@ -68,9 +69,9 @@ class WhoisClientTest extends BaseTest
     {
         $var = new Client;
         $results = $var->lookup('google.com', 'whois.verisign-grs.com');
-        $this->assertTrue(!empty($results));
-        $this->assertTrue(is_string($results));
-        $this->assertTrue(1 <= count(explode("\r\n", $results)));
+        $this->assertNotEmpty($results);
+        $this->assertIsString($results);
+        $this->assertGreaterThanOrEqual(1, count(explode("\r\n", $results)));
         unset($var, $results);
     }
 

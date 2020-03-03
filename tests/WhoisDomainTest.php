@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
@@ -22,7 +23,7 @@ class WhoisDomainTest extends BaseTest
     /**
      * The PHPUnit Setup method to build our client.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = new Client();
     }
@@ -32,7 +33,7 @@ class WhoisDomainTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $this->assertTrue(is_object($this->client));
+        $this->assertIsObject($this->client);
     }
 
     /**
@@ -42,8 +43,8 @@ class WhoisDomainTest extends BaseTest
      */
     public function testValidDomains($domain)
     {
-        $response = $this->client->lookup($domain, 'whois.verisign-grs.com');
-        $this->assertTrue(1 <= strlen($response));
+        $response = $this->client->lookup($domain);
+        $this->assertGreaterThanOrEqual(1, strlen($response));
     }
 
     /**
