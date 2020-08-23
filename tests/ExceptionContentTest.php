@@ -15,7 +15,6 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
 */
 class ExceptionContentTest extends BaseTest
 {
-
     /**
      * Basic test to check client syntax.
      */
