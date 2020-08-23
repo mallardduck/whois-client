@@ -43,7 +43,7 @@ class WhoisClientTest extends BaseTest
     public function testEmptyPrimaryLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         $var->lookup('', 'something'); // doesn't need to be real value - testing arg validation
         unset($var);
@@ -55,7 +55,7 @@ class WhoisClientTest extends BaseTest
     public function testEmptyServerLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         $var->lookup('something', ''); // doesn't need to be real value - testing arg validation
         unset($var);
@@ -66,7 +66,7 @@ class WhoisClientTest extends BaseTest
      */
     public function testClientLookupGoogle()
     {
-        $var = new Client;
+        $var = new Client();
         $results = $var->lookup('google.com', 'whois.verisign-grs.com');
         $this->assertNotEmpty($results);
         $this->assertIsString($results);
@@ -82,7 +82,7 @@ class WhoisClientTest extends BaseTest
      */
     public function testValidParsingInputs($domain, $parsed)
     {
-        $client = new Client;
+        $client = new Client();
         $this->assertTrue(method_exists($client, 'parseWhoisInput'));
         $foo = self::getMethod($client, 'parseWhoisInput');
         $wat = $foo->invokeArgs($client, [$domain]);

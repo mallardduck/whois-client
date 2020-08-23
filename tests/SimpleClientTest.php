@@ -32,7 +32,7 @@ class SimpleClientTest extends BaseTest
         $var = new SimpleClient();
         $this->assertIsObject($var);
         $var->createConnection("whois.nic.me");
-        $status = $var->makeRequest("danpock.me");
+        $status = $var->writeRequest("danpock.me");
         $response = $var->getResponseAndClose();
         $containedResponse = strstr($response, "\r\n", true);
         $this->assertSame("Domain Name: DANPOCK.ME", $containedResponse);
@@ -67,7 +67,7 @@ class SimpleClientTest extends BaseTest
         $this->assertIsResource($socket);
 
         // Make the request and grab the data...
-        $status = $var->makeRequest("danpock.me");
+        $status = $var->writeRequest("danpock.me");
         $response = $var->getResponseAndClose();
 
         // Check our refernces again...

@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
@@ -20,7 +21,7 @@ class ExceptionContentTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -34,7 +35,7 @@ class ExceptionContentTest extends BaseTest
      */
     public function testValidateLookupArgs($input, $whoisServer, $messageRegex)
     {
-        $client = new Client;
+        $client = new Client();
         $this->assertTrue(method_exists($client, 'validateLookupArgs'));
         $foo = self::getMethod($client, 'validateLookupArgs');
         $this->expectException(MissingArgException::class);

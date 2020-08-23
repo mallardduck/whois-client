@@ -55,7 +55,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @return string               The raw text results of the query response.
      * @throws Exceptions\SocketClientException
      */
-    public function makeRequest(string $lookupValue, string $whoisServer) : string
+    public function makeRequest(string $lookupValue, string $whoisServer): string
     {
         $this->createConnection($whoisServer);
         $this->writeRequest($lookupValue);
@@ -117,7 +117,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @param  int    $port The port to use for the request.
      * @return self         The very same class.
      */
-    final public function withPort(int $port) : self
+    final public function withPort(int $port): self
     {
         $this->port = $port;
         return $this;
@@ -129,7 +129,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @param  int    $timeout  The timeout duration in seconds.
      * @return self             The very same class.
      */
-    final public function withTimeout(int $timeout) : self
+    final public function withTimeout(int $timeout): self
     {
         $this->timeout = $timeout;
         return $this;

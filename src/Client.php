@@ -40,17 +40,19 @@ class Client extends AbstractWhoisClient
 
     /**
      * Performs a Whois look up on the domain provided.
-     * @param  string $input        The domain or ip being looked up via whois.
-     * @param  string $whoisServer  The whois server to preform the lookup on.
+     *
+     * @param string $input       The domain or ip being looked up via whois.
+     * @param string $whoisServer The whois server to preform the lookup on.
      *
      * @return string         The output of the Whois look up.
+     * @throws Exceptions\SocketClientException
+     * @throws MissingArgException
      */
-    public function lookup(string $input = "", string $whoisServer = "") : string
+    public function lookup(string $input = "", string $whoisServer = ""): string
     {
         $this->validateLookupArgs($input, $whoisServer);
-        $this->parseWhoisInput($input);
 
-        return $this->makeRequest($this->parsedInput, $whoisServer);
+        return $this->makeRequest($this->parseWhoisInput($input), $whoisServer);
     }
 
     /**
@@ -58,7 +60,7 @@ class Client extends AbstractWhoisClient
      * @param  string $input        A string that should represent a domain name or IP.
      * @param  string $whoisServer  A string that represents a domain or IP of a whois server.
      */
-    private function validateLookupArgs(string $input = "", string $whoisServer = "") : void
+    private function validateLookupArgs(string $input = "", string $whoisServer = ""): void
     {
         $primaryMissing = empty($input);
         $serverMissing = empty($whoisServer);
@@ -83,7 +85,7 @@ class Client extends AbstractWhoisClient
      *
      * @return string Returns the parsed whois input.
      */
-    public function parseWhoisInput(string $input) : string
+    public function parseWhoisInput(string $input): string
     {
         // Check domain encoding
         $encoding = mb_detect_encoding($input);
