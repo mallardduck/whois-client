@@ -13,7 +13,6 @@ namespace MallardDuck\Whois;
  */
 interface WhoisClientInterface
 {
-
     /**
      * Perform a Whois lookup.
      *
@@ -25,7 +24,7 @@ interface WhoisClientInterface
      *
      * @return string               The raw text results of the query response.
      */
-    public function makeRequest(string $lookupValue, string $whoisServer);
+    public function makeRequest(string $lookupValue, string $whoisServer): string;
 
     /**
      * Creates the connection to the whois server.
@@ -35,6 +34,8 @@ interface WhoisClientInterface
      * Library. The property will be used throughout the methods.
      *
      * @param string $whoisServer The whois server being queried.
+     *
+     * @throws Exceptions\SocketClientException
      */
     public function createConnection(string $whoisServer);
 
@@ -56,5 +57,5 @@ interface WhoisClientInterface
      *
      * @return string   The raw results of the query response.
      */
-    public function getResponseAndClose();
+    public function getResponseAndClose(): string;
 }

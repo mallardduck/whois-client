@@ -15,27 +15,30 @@ use MallardDuck\Whois\WhoisClientInterface;
  */
 abstract class AbstractWhoisClient implements WhoisClientInterface
 {
-
     /**
      * The port for creating the socket.
+     *
      * @var int
      */
     protected $port = 43;
 
     /**
      * The timeout duration used for WhoIs server lookups.
+     *
      * @var int
      */
     protected $timeout = 10;
 
     /**
-     * The carriage return line feed character comobo.
+     * The carriage return line feed character combo.
+     *
      * @var string
      */
     protected $clrf = "\r\n";
 
     /**
      * The input domain provided by the user.
+     *
      * @var SocketClient|null
      */
     protected $connection;
@@ -46,10 +49,11 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * Performs a Whois request using the given input for lookup and the Whois
      * server values.
      *
-     * @param  string $lookupValue  The domain or IP being looked up.
-     * @param  string $whoisServer  The whois server being queried.
+     * @param string $lookupValue The domain or IP being looked up.
+     * @param string $whoisServer The whois server being queried.
      *
      * @return string               The raw text results of the query response.
+     * @throws Exceptions\SocketClientException
      */
     public function makeRequest(string $lookupValue, string $whoisServer) : string
     {
@@ -62,6 +66,8 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * Creates a socket connection to the whois server and activates it.
      *
      * @param string $whoisServer The whois server domain or IP being queried.
+     *
+     * @throws Exceptions\SocketClientException
      */
     final public function createConnection(string $whoisServer): void
     {
@@ -76,6 +82,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @param string $lookupValue The cache item to save.
      *
      * @return int|bool Either an int of the return code, or false on some errors.
+     * @throws Exceptions\SocketClientException
      */
     final public function writeRequest(string $lookupValue)
     {
@@ -86,13 +93,14 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     /**
      * A method for retrieving a raw Whois response.
      *
-     * This method must retrieve the reponse from the active socket and then
+     * This method must retrieve the response from the active socket and then
      * close the socket. If the connection is not properly closed servers could
      * drop/ignore rapid subsequent requests.
      *
      * @return string   The raw results of the query response.
+     * @throws Exceptions\SocketClientException
      */
-    final public function getResponseAndClose() : string
+    final public function getResponseAndClose(): string
     {
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();

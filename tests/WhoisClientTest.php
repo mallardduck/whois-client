@@ -15,7 +15,6 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
 */
 class WhoisClientTest extends BaseTest
 {
-
     /**
      * Basic test to check client syntax.
      */

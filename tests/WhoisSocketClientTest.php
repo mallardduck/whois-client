@@ -15,7 +15,6 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
 */
 class WhoisSocketClientTest extends BaseTest
 {
-
     /**
      * Basic test to check client syntax.
      */

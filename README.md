@@ -11,10 +11,16 @@ This package contains the most basic Whois (RFC3912) library for PHP possible. I
 
 Rather than focus on the user friendly output this library focuses on the raw Whois protocol. The library is limited in function since it's intended to be a low-level client that handles only request and raw output. Basically the package creates a client that has a telnet-esque experience. I.e. it accepts a server to connect to, creates a socket connection, sends a basic request to lookup and then provides the response.
 
-Note: The last version to support PHP version 7.0 was tagged as 0.4.0.
-
 ## Requirements
-* PHP >= 7.1
+* PHP >= 7.2
+
+### Past PHP version support
+| PHP | Package |
+|-----|---------|
+| 7.2 | Current |
+| 7.1 | 1.1.1   |
+| 7.0 | 0.4.0   |
+| 5.6 | 0.3.0   |
 
 ## Features
 * Pure PHP based Whois (RFC3912) client.

@@ -1,15 +1,24 @@
 # This file is for unifying the coding style for different editors and IDEs
 # editorconfig.org
 
-# PHP PSR-2 Coding Standards
-# http://www.php-fig.org/psr/psr-2/
+# PHP PSR-12 Coding Standards
+# https://www.php-fig.org/psr/psr-12/
 
 root = true
 
-[*.php]
+# All files
+[*]
 charset = utf-8
 end_of_line = lf
-#insert_final_newline = true
-#trim_trailing_whitespace = true
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# PHP-Files, Composer.json, MD-Files
+[{*.php,composer.json,*.md}]
 indent_style = space
 indent_size = 4
+
+# Gitlab-CI, Travis-CI
+[*.yml]
+indent_style = space
+indent_size = 2

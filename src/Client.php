@@ -18,12 +18,14 @@ class Client extends AbstractWhoisClient
 {
     /**
      * The Unicode for IDNA.
-     * @var \TrueBV\Punycode
+     *
+     * @var Punycode
      */
     protected $punycode;
 
     /**
      * The parsed input after validating and encoding.
+     *
      * @var string
      */
     public $parsedInput = '';
@@ -35,6 +37,7 @@ class Client extends AbstractWhoisClient
     {
         $this->punycode = new Punycode();
     }
+
     /**
      * Performs a Whois look up on the domain provided.
      * @param  string $input        The domain or ip being looked up via whois.

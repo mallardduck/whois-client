@@ -14,7 +14,6 @@ use MallardDuck\Whois\SimpleClient;
 */
 class SimpleClientTest extends BaseTest
 {
-
     /**
      * Basic test to check client syntax.
      */
