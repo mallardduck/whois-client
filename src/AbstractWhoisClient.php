@@ -93,6 +93,18 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     /**
      * A method for retrieving a raw Whois response.
      *
+     * @return string
+     * @throws Exceptions\SocketClientException
+     */
+    final public function getResponse(): string
+    {
+        // Read the full output of the whois lookup.
+        return $this->connection->readAll();
+    }
+
+    /**
+     * A method for retrieving a raw Whois response.
+     *
      * This method must retrieve the response from the active socket and then
      * close the socket. If the connection is not properly closed servers could
      * drop/ignore rapid subsequent requests.
@@ -103,7 +115,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function getResponseAndClose(): string
     {
         // Read the full output of the whois lookup.
-        $response = $this->connection->readAll();
+        $response = $this->getResponse();
         // Disconnect the connections after use in order to prevent observed
         // network & performance issues. Not doing this caused mild throttling.
         $this->connection->disconnect();

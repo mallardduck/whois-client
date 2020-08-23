@@ -19,6 +19,8 @@ interface WhoisClientInterface
      * Performs a Whois request using the given input for lookup and the Whois
      * server values.
      *
+     * This method must not keep any sockets open. It's simple an single request method.
+     *
      * @param  string $lookupValue  The domain or IP being looked up.
      * @param  string $whoisServer  The whois server being queried.
      *
@@ -51,7 +53,17 @@ interface WhoisClientInterface
     /**
      * A method for retrieving a raw Whois response.
      *
-     * This method must retrieve the reponse from the active socket and then
+     * This method must only retrieve the response from the active socket and
+     * nothing more. The socket must not be closed for any subsequent requests.
+     *
+     * @return string   The raw results of the query response.
+     */
+    public function getResponse(): string;
+
+    /**
+     * A method for retrieving a raw Whois response.
+     *
+     * This method must retrieve the response from the active socket and then
      * close the socket. If the connection is not properly closed servers could
      * drop/ignore rapid subsequent requests.
      *
